@@ -18,6 +18,7 @@ public class PlaceTypeConverter {
         }
         else {
             return PlaceType.valueOf(name);
+
         }
     }
 }
