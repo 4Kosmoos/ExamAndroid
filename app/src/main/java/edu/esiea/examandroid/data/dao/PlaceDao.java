@@ -8,13 +8,13 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 
 import edu.esiea.examandroid.data.dto.PlaceWithDetails;
-import edu.esiea.examandroid.data.entity.CulturalPlace;
+import edu.esiea.examandroid.data.entity.CulturalPlaceEntity;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
-import edu.esiea.examandroid.data.entity.PlaceToEat;
-import edu.esiea.examandroid.data.entity.PlaceToExercise;
-import edu.esiea.examandroid.data.entity.PlaceToGoOut;
-import edu.esiea.examandroid.data.entity.PlaceToRelax;
-import edu.esiea.examandroid.data.entity.PlaceToSleep;
+import edu.esiea.examandroid.data.entity.PlaceToEatEntity;
+import edu.esiea.examandroid.data.entity.PlaceToExerciseEntity;
+import edu.esiea.examandroid.data.entity.PlaceToGoOutEntity;
+import edu.esiea.examandroid.data.entity.PlaceToRelaxEntity;
+import edu.esiea.examandroid.data.entity.PlaceToSleepEntity;
 
 @Dao
 public interface PlaceDao {
@@ -23,22 +23,22 @@ public interface PlaceDao {
     long insertPlace(PlaceEntity place);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertPlaceToEat(PlaceToEat placeToEat);
+    void insertPlaceToEat(PlaceToEatEntity placeToEatEntity);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertPlaceToSleep(PlaceToSleep placeToSleep);
+    void insertPlaceToSleep(PlaceToSleepEntity placeToSleepEntity);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertPlaceToGoOut(PlaceToGoOut placeToGoOut);
+    void insertPlaceToGoOut(PlaceToGoOutEntity placeToGoOutEntity);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertPlaceToRelax(PlaceToRelax placeToRelax);
+    void insertPlaceToRelax(PlaceToRelaxEntity placeToRelaxEntity);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertPlaceToExercise(PlaceToExercise placeToExercise);
+    void insertPlaceToExercise(PlaceToExerciseEntity placeToExerciseEntity);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertCulturalPlace(CulturalPlace culturalPlace);
+    void insertCulturalPlace(CulturalPlaceEntity culturalPlaceEntity);
 
     @Transaction
     @Query("SELECT * FROM place WHERE id = :placeId")

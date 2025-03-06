@@ -16,17 +16,17 @@ import androidx.room.ForeignKey;
                 onDelete = CASCADE
         )
 )
-public class PlaceToEat {
+public class PlaceToEatEntity {
     @PrimaryKey
     private int placeId;
 
     private String priceRange;
     private String categories;
 
-    public PlaceToEat() {
+    public PlaceToEatEntity() {
     }
 
-    public PlaceToEat(int placeId, String priceRange, String categories) {
+    public PlaceToEatEntity(int placeId, String priceRange, String categories) {
         this.placeId = placeId;
         this.priceRange = priceRange;
         this.categories = categories;

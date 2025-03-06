@@ -7,7 +7,7 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(
-        tableName = "place_to_sleep",
+        tableName = "cultural_place",
         foreignKeys = @ForeignKey(
                 entity = PlaceEntity.class,
                 parentColumns = "id",
@@ -15,29 +15,32 @@ import androidx.room.PrimaryKey;
                 onDelete = CASCADE
         )
 )
-public class PlaceToSleep {
+public class CulturalPlaceEntity {
 
     @PrimaryKey
     private int placeId;
-    private double minNightPrice;
-    private String categories; // ex. "Hôtel, Airbnb, Auberge"
+    private String categories;
+    private String openingHours;
+    private double entryFee;
 
-    public PlaceToSleep() {
+    public CulturalPlaceEntity() {
     }
 
-    public PlaceToSleep(int placeId, double minNightPrice, String categories) {
+    public CulturalPlaceEntity(int placeId, String openingHours, double entryFee, String categories) {
         this.placeId = placeId;
-        this.minNightPrice = minNightPrice;
-        this.categories = categories;
+        this.openingHours = openingHours;
+        this.entryFee = entryFee;
     }
 
     public int getPlaceId() { return placeId; }
     public void setPlaceId(int placeId) { this.placeId = placeId; }
 
-    public double getMinNightPrice() { return minNightPrice; }
-    public void setMinNightPrice(double minNightPrice) { this.minNightPrice = minNightPrice; }
-
     public String getCategories() { return categories; }
     public void setCategories(String categories) { this.categories = categories; }
-}
 
+    public String getOpeningHours() { return openingHours; }
+    public void setOpeningHours(String openingHours) { this.openingHours = openingHours; }
+
+    public double getEntryFee() { return entryFee; }
+    public void setEntryFee(double entryFee) { this.entryFee = entryFee; }
+}

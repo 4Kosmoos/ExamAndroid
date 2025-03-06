@@ -3,24 +3,24 @@ package edu.esiea.examandroid.data;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverters;
+
 import android.content.Context;
 import edu.esiea.examandroid.data.dao.PlaceDao;
-import edu.esiea.examandroid.data.entity.CulturalPlace;
+import edu.esiea.examandroid.data.entity.CulturalPlaceEntity;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
-import edu.esiea.examandroid.data.entity.PlaceToEat;
-import edu.esiea.examandroid.data.entity.PlaceToExercise;
-import edu.esiea.examandroid.data.entity.PlaceToGoOut;
-import edu.esiea.examandroid.data.entity.PlaceToRelax;
-import edu.esiea.examandroid.data.entity.PlaceToSleep;
+import edu.esiea.examandroid.data.entity.PlaceToEatEntity;
+import edu.esiea.examandroid.data.entity.PlaceToExerciseEntity;
+import edu.esiea.examandroid.data.entity.PlaceToGoOutEntity;
+import edu.esiea.examandroid.data.entity.PlaceToRelaxEntity;
+import edu.esiea.examandroid.data.entity.PlaceToSleepEntity;
 
 @Database(entities = {PlaceEntity.class,
-        PlaceToEat.class,
-        PlaceToSleep.class,
-        PlaceToGoOut.class,
-        PlaceToRelax.class,
-        PlaceToExercise.class,
-        CulturalPlace.class},
+        PlaceToEatEntity.class,
+        PlaceToSleepEntity.class,
+        PlaceToGoOutEntity.class,
+        PlaceToRelaxEntity.class,
+        PlaceToExerciseEntity.class,
+        CulturalPlaceEntity.class},
         version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;

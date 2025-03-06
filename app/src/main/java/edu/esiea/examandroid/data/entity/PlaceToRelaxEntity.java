@@ -7,7 +7,7 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(
-        tableName = "cultural_place",
+        tableName = "place_to_relax",
         foreignKeys = @ForeignKey(
                 entity = PlaceEntity.class,
                 parentColumns = "id",
@@ -15,7 +15,7 @@ import androidx.room.PrimaryKey;
                 onDelete = CASCADE
         )
 )
-public class CulturalPlace {
+public class PlaceToRelaxEntity {
 
     @PrimaryKey
     private int placeId;
@@ -23,10 +23,10 @@ public class CulturalPlace {
     private String openingHours;
     private double entryFee;
 
-    public CulturalPlace() {
+    public PlaceToRelaxEntity() {
     }
 
-    public CulturalPlace(int placeId, String openingHours, double entryFee, String categories) {
+    public PlaceToRelaxEntity(int placeId, String openingHours, double entryFee, String categories) {
         this.placeId = placeId;
         this.openingHours = openingHours;
         this.entryFee = entryFee;

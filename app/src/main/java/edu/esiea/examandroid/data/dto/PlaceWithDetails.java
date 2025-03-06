@@ -3,33 +3,62 @@ package edu.esiea.examandroid.data.dto;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
-import edu.esiea.examandroid.data.entity.CulturalPlace;
+import edu.esiea.examandroid.data.entity.CulturalPlaceEntity;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
-import edu.esiea.examandroid.data.entity.PlaceToEat;
-import edu.esiea.examandroid.data.entity.PlaceToExercise;
-import edu.esiea.examandroid.data.entity.PlaceToGoOut;
-import edu.esiea.examandroid.data.entity.PlaceToRelax;
-import edu.esiea.examandroid.data.entity.PlaceToSleep;
+import edu.esiea.examandroid.data.entity.PlaceToEatEntity;
+import edu.esiea.examandroid.data.entity.PlaceToExerciseEntity;
+import edu.esiea.examandroid.data.entity.PlaceToGoOutEntity;
+import edu.esiea.examandroid.data.entity.PlaceToRelaxEntity;
+import edu.esiea.examandroid.data.entity.PlaceToSleepEntity;
 
 public class PlaceWithDetails {
     @Embedded
     private PlaceEntity place;
 
     @Relation(parentColumn = "id", entityColumn = "placeId")
-    private PlaceToEat placeToEat;
+    private PlaceToEatEntity placeToEatEntity;
 
     @Relation(parentColumn = "id", entityColumn = "placeId")
-    private PlaceToSleep placeToSleep;
+    private PlaceToSleepEntity placeToSleepEntity;
 
     @Relation(parentColumn = "id", entityColumn = "placeId")
-    private PlaceToGoOut placeToGoOut;
+    private PlaceToGoOutEntity placeToGoOutEntity;
 
     @Relation(parentColumn = "id", entityColumn = "placeId")
-    private PlaceToRelax placeToRelax;
+    private PlaceToRelaxEntity placeToRelaxEntity;
 
     @Relation(parentColumn = "id", entityColumn = "placeId")
-    private PlaceToExercise placeToExercise;
+    private PlaceToExerciseEntity placeToExerciseEntity;
 
     @Relation(parentColumn = "id", entityColumn = "placeId")
-    private CulturalPlace culturalPlace;
+    private CulturalPlaceEntity culturalPlaceEntity;
+
+    public PlaceEntity getPlace() {
+        return place;
+    }
+
+    public PlaceToEatEntity getPlaceToEat() {
+        return placeToEatEntity;
+    }
+
+    public PlaceToSleepEntity getPlaceToSleep() {
+        return placeToSleepEntity;
+    }
+
+    public PlaceToGoOutEntity getPlaceToGoOut() {
+        return placeToGoOutEntity;
+    }
+
+    public PlaceToRelaxEntity getPlaceToRelax() {
+        return placeToRelaxEntity;
+    }
+
+    public PlaceToExerciseEntity getPlaceToExercise() {
+        return placeToExerciseEntity;
+    }
+
+    public CulturalPlaceEntity getCulturalPlace() {
+        return culturalPlaceEntity;
+    }
+
 }

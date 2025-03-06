@@ -3,6 +3,7 @@ package edu.esiea.examandroid.data.entity;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import edu.esiea.examandroid.enums.PlaceType;
 
 @Entity(tableName = "place")
 public class PlaceEntity {
@@ -16,14 +17,14 @@ public class PlaceEntity {
     private String website;
     private double latitude;
     private double longitude;
-    private String type;
+    private PlaceType type;
 
     public PlaceEntity() {
     }
 
     public PlaceEntity(int id, String name, String description, String phoneNumber,
                        String email, String website, double latitude,
-                       double longitude, String type) {
+                       double longitude, PlaceType type) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -59,6 +60,6 @@ public class PlaceEntity {
     public double getLongitude() { return longitude; }
     public void setLongitude(double longitude) { this.longitude = longitude; }
 
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+    public PlaceType getType() { return type; }
+    public void setType(PlaceType type) { this.type = type; }
 }

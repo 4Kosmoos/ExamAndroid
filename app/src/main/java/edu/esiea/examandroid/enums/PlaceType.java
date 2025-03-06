@@ -1,10 +1,10 @@
 package edu.esiea.examandroid.enums;
 
 public enum PlaceType {
-    PlacesToEat,
+    PlaceToEat,
     PlaceToSleep,
-    PlacesToGoOut,
-    PlacesToRelax,
-    PlacesToExercise,
-    CulturalPlaces
+    PlaceToGoOut,
+    PlaceToRelax,
+    PlaceToExercise,
+    CulturalPlace
 }
