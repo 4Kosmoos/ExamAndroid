@@ -20,7 +20,6 @@ public class PlaceMapper {
         PlaceEntity entity = dto.getPlace();
         PlaceType type = entity.getType();
 
-        // Champs communs à tous les types
         int id = entity.getId();
         String name = entity.getName();
         String description = entity.getDescription();
@@ -30,7 +29,6 @@ public class PlaceMapper {
         double latitude = entity.getLatitude();
         double longitude = entity.getLongitude();
 
-        // On détermine le type de lieu pour mapper vers le modèle adéquat
         switch (type) {
             case PlaceToEat:
                 PlaceToEatEntity eatDetail = dto.getPlaceToEat();
