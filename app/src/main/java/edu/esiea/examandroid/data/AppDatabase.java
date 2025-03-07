@@ -3,8 +3,12 @@ package edu.esiea.examandroid.data;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import android.content.Context;
+
+import edu.esiea.examandroid.data.converter.EatCategoriesListConverter;
+import edu.esiea.examandroid.data.converter.PriceRangeConverter;
 import edu.esiea.examandroid.data.dao.PlaceDao;
 import edu.esiea.examandroid.data.entity.CulturalPlaceEntity;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
@@ -22,6 +26,10 @@ import edu.esiea.examandroid.data.entity.PlaceToSleepEntity;
         PlaceToExerciseEntity.class,
         CulturalPlaceEntity.class},
         version = 1)
+@TypeConverters({
+        PriceRangeConverter.class,
+        EatCategoriesListConverter.class
+})
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
 

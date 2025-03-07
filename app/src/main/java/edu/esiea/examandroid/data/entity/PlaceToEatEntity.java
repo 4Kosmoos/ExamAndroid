@@ -7,6 +7,11 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.ForeignKey;
 
+import java.util.List;
+
+import edu.esiea.examandroid.enums.EatCategories;
+import edu.esiea.examandroid.enums.PriceRange;
+
 @Entity(
         tableName = "place_to_eat",
         foreignKeys = @ForeignKey(
@@ -20,13 +25,13 @@ public class PlaceToEatEntity {
     @PrimaryKey
     private int placeId;
 
-    private String priceRange;
-    private String categories;
+    private PriceRange priceRange;
+    private List<EatCategories> categories;
 
     public PlaceToEatEntity() {
     }
 
-    public PlaceToEatEntity(int placeId, String priceRange, String categories) {
+    public PlaceToEatEntity(int placeId, PriceRange priceRange, List<EatCategories> categories) {
         this.placeId = placeId;
         this.priceRange = priceRange;
         this.categories = categories;
@@ -35,9 +40,9 @@ public class PlaceToEatEntity {
     public int getPlaceId() { return placeId; }
     public void setPlaceId(int placeId) { this.placeId = placeId; }
 
-    public String getPriceRange() { return priceRange; }
-    public void setPriceRange(String priceRange) { this.priceRange = priceRange; }
+    public PriceRange getPriceRange() { return priceRange; }
+    public void setPriceRange(PriceRange priceRange) { this.priceRange = priceRange; }
 
-    public String getCategories() { return categories; }
-    public void setCategories(String categories) { this.categories = categories; }
+    public List<EatCategories> getCategories() { return categories; }
+    public void setCategories(List<EatCategories> categories) { this.categories = categories; }
 }

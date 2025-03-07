@@ -7,9 +7,11 @@ import java.util.List;
 import edu.esiea.examandroid.data.dto.PlaceWithDetails;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
 import edu.esiea.examandroid.data.entity.PlaceToEatEntity;
+import edu.esiea.examandroid.enums.EatCategories;
 import edu.esiea.examandroid.enums.PlaceType;
+import edu.esiea.examandroid.enums.PriceRange;
 import edu.esiea.examandroid.model.Place;
-
+import edu.esiea.examandroid.model.PlaceToEat;
 
 
 public class PlaceMapper {
@@ -22,7 +24,7 @@ public class PlaceMapper {
         int id = entity.getId();
         String name = entity.getName();
         String description = entity.getDescription();
-        String phone = entity.getPhoneNumber();
+        String phoneNumber = entity.getPhoneNumber();
         String email = entity.getEmail();
         String website = entity.getWebsite();
         double latitude = entity.getLatitude();
@@ -32,13 +34,14 @@ public class PlaceMapper {
         switch (type) {
             case PlaceToEat:
                 PlaceToEatEntity eatDetail = dto.getPlaceToEat();
-
-                String priceRange = (eatDetail != null) ? eatDetail.getPriceRange() : "";
-                String categoriesStr = (eatDetail != null) ? eatDetail.getCategories() : "";
-                List<String> categories = categoriesStr.isEmpty()
-                        ? new ArrayList<>()
-                        : Arrays.asList(categoriesStr.split(","));
-                return new PlaceToEatEntity(id, priceRange, categories);
+                if (eatDetail == null) {
+                    return new Place(id, name, description, phoneNumber, email, website,
+                            latitude, longitude, type);
+                }
+                PriceRange priceRange = eatDetail.getPriceRange();
+                List<EatCategories> categories = eatDetail.getCategories();
+                return new PlaceToEat(id,name,description, phoneNumber, email, website, latitude, longitude, type, priceRange, categories
+                );
 
             case PlaceToSleep:
 
@@ -61,7 +64,7 @@ public class PlaceMapper {
                 break;
 
             default:
-                return new Place(id, name, description, phone, email, website,
+                return new Place(id, name, description, phoneNumber, email, website,
                         latitude, longitude, type);
         }
         return null;
