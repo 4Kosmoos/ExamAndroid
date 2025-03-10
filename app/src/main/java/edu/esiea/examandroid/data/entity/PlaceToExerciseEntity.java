@@ -46,6 +46,6 @@ public class PlaceToExerciseEntity {
     public double getEntryFee() { return entryFee; }
     public void setEntryFee(double entryFee) { this.entryFee = entryFee; }
 
-    public boolean setMandatorySubscription(){return mandatorySubscription;}
-    public void GetMandatorySubscription(boolean mandatorySubscription){this.mandatorySubscription= mandatorySubscription;}
+    public boolean getMandatorySubscription(){return mandatorySubscription;}
+    public void setMandatorySubscription(boolean mandatorySubscription){this.mandatorySubscription= mandatorySubscription;}
 }

@@ -31,7 +31,7 @@ public class PlaceMapper {
 
         switch (type) {
             case PlaceToEat:
-                PlaceToEatEntity eatDetail = dto.getPlaceToEat();
+                PlaceToEatEntity eatDetail = dto.getPlaceToEatEntity();
                 if (eatDetail == null) {
                     return new Place(id, name, description, phoneNumber, email, website,
                             latitude, longitude, type);

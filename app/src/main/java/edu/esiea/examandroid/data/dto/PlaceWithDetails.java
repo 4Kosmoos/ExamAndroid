@@ -33,32 +33,20 @@ public class PlaceWithDetails {
     @Relation(parentColumn = "id", entityColumn = "placeId")
     private CulturalPlaceEntity culturalPlaceEntity;
 
-    public PlaceEntity getPlace() {
-        return place;
-    }
+    public void setPlace(PlaceEntity place) { this.place = place; }
+    public void setPlaceToEatEntity(PlaceToEatEntity placeToEatEntity) { this.placeToEatEntity = placeToEatEntity; }
+    public void setPlaceToSleepEntity(PlaceToSleepEntity placeToSleepEntity) { this.placeToSleepEntity = placeToSleepEntity; }
+    public void setPlaceToGoOutEntity(PlaceToGoOutEntity placeToGoOutEntity) { this.placeToGoOutEntity = placeToGoOutEntity; }
+    public void setPlaceToRelaxEntity(PlaceToRelaxEntity placeToRelaxEntity) { this.placeToRelaxEntity = placeToRelaxEntity; }
+    public void setPlaceToExerciseEntity(PlaceToExerciseEntity placeToExerciseEntity) { this.placeToExerciseEntity = placeToExerciseEntity; }
+    public void setCulturalPlaceEntity(CulturalPlaceEntity culturalPlaceEntity) { this.culturalPlaceEntity = culturalPlaceEntity; }
 
-    public PlaceToEatEntity getPlaceToEat() {
-        return placeToEatEntity;
-    }
-
-    public PlaceToSleepEntity getPlaceToSleep() {
-        return placeToSleepEntity;
-    }
-
-    public PlaceToGoOutEntity getPlaceToGoOut() {
-        return placeToGoOutEntity;
-    }
-
-    public PlaceToRelaxEntity getPlaceToRelax() {
-        return placeToRelaxEntity;
-    }
-
-    public PlaceToExerciseEntity getPlaceToExercise() {
-        return placeToExerciseEntity;
-    }
-
-    public CulturalPlaceEntity getCulturalPlace() {
-        return culturalPlaceEntity;
-    }
+    public PlaceEntity getPlace() { return place; }
+    public PlaceToEatEntity getPlaceToEatEntity() { return placeToEatEntity; }
+    public PlaceToSleepEntity getPlaceToSleepEntity() { return placeToSleepEntity; }
+    public PlaceToGoOutEntity getPlaceToGoOutEntity() { return placeToGoOutEntity; }
+    public PlaceToRelaxEntity getPlaceToRelaxEntity() { return placeToRelaxEntity; }
+    public PlaceToExerciseEntity getPlaceToExerciseEntity() { return placeToExerciseEntity; }
+    public CulturalPlaceEntity getCulturalPlaceEntity() { return culturalPlaceEntity; }
 
 }

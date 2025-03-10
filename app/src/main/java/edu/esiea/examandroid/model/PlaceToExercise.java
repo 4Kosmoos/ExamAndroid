@@ -1,11 +1,14 @@
 package edu.esiea.examandroid.model;
 
 import java.util.List;
+
+import edu.esiea.examandroid.enums.EatCategories;
 import edu.esiea.examandroid.enums.PlaceType;
+import edu.esiea.examandroid.enums.SportPlaceCategories;
 
 public class PlaceToExercise extends Place {
 
-    private String categories;
+    private List<SportPlaceCategories> categories;
     private String openingHours;
     private double entryFee;
     private boolean mandatorySubscription;
@@ -15,7 +18,7 @@ public class PlaceToExercise extends Place {
 
     public PlaceToExercise(int id, String name, String description, String phoneNumber, String email,
                       String website, double latitude, double longitude, PlaceType type,
-                      String openingHours, String categories, double entryFee, boolean mandatorySubscription) {
+                      String openingHours, List<SportPlaceCategories> categories, double entryFee, boolean mandatorySubscription) {
         super(id, name, description, phoneNumber, email, website, latitude, longitude, type);
         this.openingHours = openingHours;
         this.categories = categories;
@@ -23,7 +26,7 @@ public class PlaceToExercise extends Place {
         this.mandatorySubscription = mandatorySubscription;
     }
 
-    public boolean isMandatorySubscription() {
+    public boolean getMandatorySubscription() {
         return mandatorySubscription;
     }
 
@@ -47,11 +50,11 @@ public class PlaceToExercise extends Place {
         this.openingHours = openingHours;
     }
 
-    public String getCategories() {
+    public List<SportPlaceCategories> getCategories() {
         return categories;
     }
 
-    public void setCategories(String categories) {
+    public void setCategories(List<SportPlaceCategories> categories) {
         this.categories = categories;
     }
 }
