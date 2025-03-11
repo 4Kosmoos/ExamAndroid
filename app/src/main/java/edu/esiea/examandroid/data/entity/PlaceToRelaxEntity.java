@@ -6,6 +6,10 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.util.List;
+
+import edu.esiea.examandroid.enums.PlaceToRelaxCategories;
+
 @Entity(
         tableName = "place_to_relax",
         foreignKeys = @ForeignKey(
@@ -19,24 +23,26 @@ public class PlaceToRelaxEntity {
 
     @PrimaryKey
     private int placeId;
-    private String categories;
+    private List<PlaceToRelaxCategories> categories;
     private String openingHours;
     private double entryFee;
+
 
     public PlaceToRelaxEntity() {
     }
 
-    public PlaceToRelaxEntity(int placeId, String openingHours, double entryFee, String categories) {
+    public PlaceToRelaxEntity(int placeId, String openingHours, double entryFee, List<PlaceToRelaxCategories> categories) {
         this.placeId = placeId;
         this.openingHours = openingHours;
         this.entryFee = entryFee;
+        this.categories = categories;
     }
 
     public int getPlaceId() { return placeId; }
     public void setPlaceId(int placeId) { this.placeId = placeId; }
 
-    public String getCategories() { return categories; }
-    public void setCategories(String categories) { this.categories = categories; }
+    public List<PlaceToRelaxCategories> getCategories() { return categories; }
+    public void setCategories(List<PlaceToRelaxCategories> categories) { this.categories = categories; }
 
     public String getOpeningHours() { return openingHours; }
     public void setOpeningHours(String openingHours) { this.openingHours = openingHours; }
