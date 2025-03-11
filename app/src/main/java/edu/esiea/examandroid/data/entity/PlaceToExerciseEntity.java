@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.List;
 
+import edu.esiea.examandroid.data.dao.ChildPlaceEntity;
 import edu.esiea.examandroid.enums.SportCategories;
 
 @Entity(
@@ -20,7 +21,7 @@ import edu.esiea.examandroid.enums.SportCategories;
                 onDelete = CASCADE
         )
 )
-public class PlaceToExerciseEntity {
+public class PlaceToExerciseEntity implements ChildPlaceEntity {
     @PrimaryKey
     private int placeId;
     private List<SportCategories> categories;
@@ -39,8 +40,13 @@ public class PlaceToExerciseEntity {
         this.mandatorySubscription = mandatorySubscription;
     }
 
-    public int getPlaceId() { return placeId; }
-    public void setPlaceId(int placeId) { this.placeId = placeId; }
+    @Override
+    public void setPlaceId(int placeId) {
+        this.placeId = placeId;
+    }
+    public int getPlaceId() {
+        return placeId;
+    }
 
     public List<SportCategories> getCategories() { return categories; }
     public void setCategories(List<SportCategories> categories) { this.categories = categories; }

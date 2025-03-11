@@ -8,6 +8,7 @@ import static androidx.room.ForeignKey.CASCADE;
 
 import java.util.List;
 
+import edu.esiea.examandroid.data.dao.ChildPlaceEntity;
 import edu.esiea.examandroid.enums.GoOutCategories;
 
 @Entity(
@@ -20,7 +21,7 @@ import edu.esiea.examandroid.enums.GoOutCategories;
         )
 )
 
-public class PlaceToGoOutEntity {
+public class PlaceToGoOutEntity implements ChildPlaceEntity {
 
     @PrimaryKey
     private int placeId;
@@ -39,8 +40,13 @@ public class PlaceToGoOutEntity {
         this.categories = categories;
     }
 
-    public int getPlaceId() { return placeId; }
-    public void setPlaceId(int placeId) { this.placeId = placeId; }
+    @Override
+    public void setPlaceId(int placeId) {
+        this.placeId = placeId;
+    }
+    public int getPlaceId() {
+        return placeId;
+    }
 
     public String getOpeningHours() { return openingHours; }
     public void setOpeningHours(String openingHours) { this.openingHours = openingHours; }

@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.List;
 
+import edu.esiea.examandroid.data.dao.ChildPlaceEntity;
 import edu.esiea.examandroid.enums.CulturalCategories;
 
 @Entity(
@@ -19,7 +20,7 @@ import edu.esiea.examandroid.enums.CulturalCategories;
                 onDelete = CASCADE
         )
 )
-public class CulturalPlaceEntity {
+public class CulturalPlaceEntity implements ChildPlaceEntity {
 
     @PrimaryKey
     private int placeId;
@@ -37,8 +38,13 @@ public class CulturalPlaceEntity {
         this.categories = categories;
     }
 
-    public int getPlaceId() { return placeId; }
-    public void setPlaceId(int placeId) { this.placeId = placeId; }
+    @Override
+    public void setPlaceId(int placeId) {
+        this.placeId = placeId;
+    }
+    public int getPlaceId() {
+        return placeId;
+    }
 
     public List<CulturalCategories> getCategories() { return categories; }
     public void setCategories(List<CulturalCategories> categories) { this.categories = categories; }
