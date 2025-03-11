@@ -6,6 +6,10 @@ import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
 
+import java.util.List;
+
+import edu.esiea.examandroid.enums.PlaceToGoOutCategories;
+
 @Entity(
         tableName = "place_to_go_out",
         foreignKeys = @ForeignKey(
@@ -21,16 +25,18 @@ public class PlaceToGoOutEntity {
     @PrimaryKey
     private int placeId;
 
-    private String openingHours; // ex. "10:00 - 02:00"
+    private String openingHours;
     private double entryFee;     // 0 => entrée gratuite
+    private List<PlaceToGoOutCategories> categories;
 
     public PlaceToGoOutEntity() {
     }
 
-    public PlaceToGoOutEntity(int placeId, String openingHours, double entryFee) {
+    public PlaceToGoOutEntity(int placeId, String openingHours, double entryFee, List<PlaceToGoOutCategories> categories) {
         this.placeId = placeId;
         this.openingHours = openingHours;
         this.entryFee = entryFee;
+        this.categories = categories;
     }
 
     public int getPlaceId() { return placeId; }
@@ -41,4 +47,12 @@ public class PlaceToGoOutEntity {
 
     public double getEntryFee() { return entryFee; }
     public void setEntryFee(double entryFee) { this.entryFee = entryFee; }
+
+    public List<PlaceToGoOutCategories> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<PlaceToGoOutCategories> categories) {
+        this.categories = categories;
+    }
 }
