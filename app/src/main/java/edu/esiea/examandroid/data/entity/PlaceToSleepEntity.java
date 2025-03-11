@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.List;
 
-import edu.esiea.examandroid.enums.PlaceToSleepCategories;
+import edu.esiea.examandroid.enums.SleepCategories;
 
 @Entity(
         tableName = "place_to_sleep",
@@ -24,12 +24,12 @@ public class PlaceToSleepEntity {
     @PrimaryKey
     private int placeId;
     private double minNightPrice;
-    private List<PlaceToSleepCategories> categories;
+    private List<SleepCategories> categories;
 
     public PlaceToSleepEntity() {
     }
 
-    public PlaceToSleepEntity(int placeId, double minNightPrice, List<PlaceToSleepCategories> categories) {
+    public PlaceToSleepEntity(int placeId, double minNightPrice, List<SleepCategories> categories) {
         this.placeId = placeId;
         this.minNightPrice = minNightPrice;
         this.categories = categories;
@@ -41,7 +41,7 @@ public class PlaceToSleepEntity {
     public double getMinNightPrice() { return minNightPrice; }
     public void setMinNightPrice(double minNightPrice) { this.minNightPrice = minNightPrice; }
 
-    public List<PlaceToSleepCategories> getCategories() { return categories; }
-    public void setCategories(List<PlaceToSleepCategories> categories) { this.categories = categories; }
+    public List<SleepCategories> getCategories() { return categories; }
+    public void setCategories(List<SleepCategories> categories) { this.categories = categories; }
 }
 

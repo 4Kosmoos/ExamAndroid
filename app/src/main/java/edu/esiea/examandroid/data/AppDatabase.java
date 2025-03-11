@@ -8,7 +8,9 @@ import androidx.room.TypeConverters;
 import android.content.Context;
 
 import edu.esiea.examandroid.data.converter.EatCategoriesListConverter;
+import edu.esiea.examandroid.data.converter.GoOutCategoriesConverter;
 import edu.esiea.examandroid.data.converter.PriceRangeConverter;
+import edu.esiea.examandroid.data.converter.SleepCategoriesConverter;
 import edu.esiea.examandroid.data.dao.PlaceDao;
 import edu.esiea.examandroid.data.entity.CulturalPlaceEntity;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
@@ -28,7 +30,10 @@ import edu.esiea.examandroid.data.entity.PlaceToSleepEntity;
         version = 1)
 @TypeConverters({
         PriceRangeConverter.class,
-        EatCategoriesListConverter.class
+        EatCategoriesListConverter.class,
+        SleepCategoriesConverter.class,
+        GoOutCategoriesConverter.class
+
 })
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;

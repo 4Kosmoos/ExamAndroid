@@ -1,17 +1,21 @@
 package edu.esiea.examandroid.data.mapper;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import edu.esiea.examandroid.data.dto.PlaceWithDetails;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
 import edu.esiea.examandroid.data.entity.PlaceToEatEntity;
+import edu.esiea.examandroid.data.entity.PlaceToGoOutEntity;
+import edu.esiea.examandroid.data.entity.PlaceToSleepEntity;
 import edu.esiea.examandroid.enums.EatCategories;
+import edu.esiea.examandroid.enums.GoOutCategories;
+import edu.esiea.examandroid.enums.SleepCategories;
 import edu.esiea.examandroid.enums.PlaceType;
 import edu.esiea.examandroid.enums.PriceRange;
 import edu.esiea.examandroid.model.Place;
 import edu.esiea.examandroid.model.PlaceToEat;
+import edu.esiea.examandroid.model.PlaceToSleep;
+import edu.esiea.examandroid.model.placeToGoOut;
 
 
 public class PlaceMapper {
@@ -42,12 +46,27 @@ public class PlaceMapper {
                 );
 
             case PlaceToSleep:
-
-                break;
+                PlaceToSleepEntity sleepDetail = dto.getPlaceToSleepEntity();
+                if (sleepDetail == null) {
+                    return new Place(id, name, description, phoneNumber, email, website,
+                            latitude, longitude, type);
+                }
+                double minNightPrice = sleepDetail.getMinNightPrice();
+                List<SleepCategories> sleepCategories = sleepDetail.getCategories();
+                return new PlaceToSleep(id,name,description, phoneNumber, email, website, latitude, longitude, type, sleepCategories, minNightPrice
+                );
 
             case PlaceToGoOut:
 
-                break;
+                PlaceToGoOutEntity goOutDetail = dto.getPlaceToGoOutEntity();
+                if (goOutDetail == null){
+                    return new Place(id, name, description, phoneNumber, email, website,
+                            latitude, longitude, type);
+                }
+                String openingHours = goOutDetail.getOpeningHours();
+                double entryFee = goOutDetail.getEntryFee();
+                List<GoOutCategories> goOutCategories = goOutDetail.getCategories();
+                return new placeToGoOut(id,name,description, phoneNumber, email, website, latitude, longitude, type, openingHours, entryFee, goOutCategories);
 
             case PlaceToRelax:
 

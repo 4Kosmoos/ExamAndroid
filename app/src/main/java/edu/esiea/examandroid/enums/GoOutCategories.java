@@ -1,6 +1,6 @@
 package edu.esiea.examandroid.enums;
 
-public enum PlaceToGoOutCategories {
+public enum GoOutCategories {
     BAR,
     PUB,
     BAR_A_JEUX,
