@@ -1,18 +1,21 @@
 package edu.esiea.examandroid.model;
 
+import java.util.List;
+
+import edu.esiea.examandroid.enums.PlaceToSleepCategories;
 import edu.esiea.examandroid.enums.PlaceType;
 
 public class PlaceToSleep extends Place{
 
     private double minNightPrice;
-    private String categories;
+    private List<PlaceToSleepCategories> categories;
 
     public PlaceToSleep() {
     }
 
     public PlaceToSleep(int id, String name, String description, String phoneNumber, String email,
                         String website, double latitude, double longitude, PlaceType type,
-                        String openingHours, double entryFee, String categories, double minNightPrice) {
+                        List<PlaceToSleepCategories> categories, double minNightPrice) {
         super(id, name, description, phoneNumber, email, website, latitude, longitude, type);
         this.categories = categories;
         this.minNightPrice = minNightPrice;
@@ -26,11 +29,11 @@ public class PlaceToSleep extends Place{
         this.minNightPrice = minNightPrice;
     }
 
-    public String getCategories() {
+    public List<PlaceToSleepCategories> getCategories() {
         return categories;
     }
 
-    public void setCategories(String categories) {
+    public void setCategories(List<PlaceToSleepCategories> categories) {
         this.categories = categories;
     }
 }
