@@ -1,6 +1,6 @@
 package edu.esiea.examandroid.enums;
 
-public enum PlaceToRelaxCategories {
+public enum RelaxCategories {
     CINEMA,
     ESCAPE_GAME,
     SPA,

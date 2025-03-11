@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.List;
 
-import edu.esiea.examandroid.enums.PlaceToRelaxCategories;
+import edu.esiea.examandroid.enums.RelaxCategories;
 
 @Entity(
         tableName = "place_to_relax",
@@ -23,7 +23,7 @@ public class PlaceToRelaxEntity {
 
     @PrimaryKey
     private int placeId;
-    private List<PlaceToRelaxCategories> categories;
+    private List<RelaxCategories> categories;
     private String openingHours;
     private double entryFee;
 
@@ -31,7 +31,7 @@ public class PlaceToRelaxEntity {
     public PlaceToRelaxEntity() {
     }
 
-    public PlaceToRelaxEntity(int placeId, String openingHours, double entryFee, List<PlaceToRelaxCategories> categories) {
+    public PlaceToRelaxEntity(int placeId, String openingHours, double entryFee, List<RelaxCategories> categories) {
         this.placeId = placeId;
         this.openingHours = openingHours;
         this.entryFee = entryFee;
@@ -41,8 +41,8 @@ public class PlaceToRelaxEntity {
     public int getPlaceId() { return placeId; }
     public void setPlaceId(int placeId) { this.placeId = placeId; }
 
-    public List<PlaceToRelaxCategories> getCategories() { return categories; }
-    public void setCategories(List<PlaceToRelaxCategories> categories) { this.categories = categories; }
+    public List<RelaxCategories> getCategories() { return categories; }
+    public void setCategories(List<RelaxCategories> categories) { this.categories = categories; }
 
     public String getOpeningHours() { return openingHours; }
     public void setOpeningHours(String openingHours) { this.openingHours = openingHours; }
