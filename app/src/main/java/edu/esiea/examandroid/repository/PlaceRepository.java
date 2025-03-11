@@ -1,7 +1,7 @@
 package edu.esiea.examandroid.repository;
 
 import edu.esiea.examandroid.data.dao.PlaceDao;
-import edu.esiea.examandroid.data.dao.SpecificPlaceDao;
+import edu.esiea.examandroid.data.dao.ChildPlaceEntity;
 import edu.esiea.examandroid.data.dto.PlaceWithDetails;
 import edu.esiea.examandroid.data.entity.CulturalPlaceEntity;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
@@ -19,7 +19,7 @@ public class PlaceRepository {
         this.placeDao = placeDao;
     }
 
-    public void addPlace(PlaceEntity place, SpecificPlaceDao details) {
+    public void addPlace(PlaceEntity place, ChildPlaceEntity details) {
         int placeId = (int) placeDao.insertPlace(place);
         details.setPlaceId(placeId);
 

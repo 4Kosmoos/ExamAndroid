@@ -8,7 +8,7 @@ import static androidx.room.ForeignKey.CASCADE;
 
 import java.util.List;
 
-import edu.esiea.examandroid.data.dao.SpecificPlaceDao;
+import edu.esiea.examandroid.data.dao.ChildPlaceEntity;
 import edu.esiea.examandroid.enums.GoOutCategories;
 
 @Entity(
@@ -21,7 +21,7 @@ import edu.esiea.examandroid.enums.GoOutCategories;
         )
 )
 
-public class PlaceToGoOutEntity implements SpecificPlaceDao {
+public class PlaceToGoOutEntity implements ChildPlaceEntity {
 
     @PrimaryKey
     private int placeId;

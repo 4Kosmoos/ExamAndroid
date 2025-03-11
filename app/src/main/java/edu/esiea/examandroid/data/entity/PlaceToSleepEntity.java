@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.List;
 
-import edu.esiea.examandroid.data.dao.SpecificPlaceDao;
+import edu.esiea.examandroid.data.dao.ChildPlaceEntity;
 import edu.esiea.examandroid.enums.SleepCategories;
 
 @Entity(
@@ -20,7 +20,7 @@ import edu.esiea.examandroid.enums.SleepCategories;
                 onDelete = CASCADE
         )
 )
-public class PlaceToSleepEntity implements SpecificPlaceDao {
+public class PlaceToSleepEntity implements ChildPlaceEntity {
 
     @PrimaryKey
     private int placeId;

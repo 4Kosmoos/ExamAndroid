@@ -1,5 +1,5 @@
 package edu.esiea.examandroid.data.dao;
 
-public interface SpecificPlaceDao {
+public interface ChildPlaceEntity {
     void setPlaceId(int placeId);
 }

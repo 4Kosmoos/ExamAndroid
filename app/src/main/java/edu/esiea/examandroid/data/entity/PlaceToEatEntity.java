@@ -9,7 +9,7 @@ import androidx.room.ForeignKey;
 
 import java.util.List;
 
-import edu.esiea.examandroid.data.dao.SpecificPlaceDao;
+import edu.esiea.examandroid.data.dao.ChildPlaceEntity;
 import edu.esiea.examandroid.enums.EatCategories;
 import edu.esiea.examandroid.enums.PriceRange;
 
@@ -22,7 +22,7 @@ import edu.esiea.examandroid.enums.PriceRange;
                 onDelete = CASCADE
         )
 )
-public class PlaceToEatEntity implements SpecificPlaceDao {
+public class PlaceToEatEntity implements ChildPlaceEntity {
     @PrimaryKey
     private int placeId;
 

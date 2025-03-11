@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.List;
 
-import edu.esiea.examandroid.data.dao.SpecificPlaceDao;
+import edu.esiea.examandroid.data.dao.ChildPlaceEntity;
 import edu.esiea.examandroid.enums.SportCategories;
 
 @Entity(
@@ -21,7 +21,7 @@ import edu.esiea.examandroid.enums.SportCategories;
                 onDelete = CASCADE
         )
 )
-public class PlaceToExerciseEntity implements SpecificPlaceDao {
+public class PlaceToExerciseEntity implements ChildPlaceEntity {
     @PrimaryKey
     private int placeId;
     private List<SportCategories> categories;
