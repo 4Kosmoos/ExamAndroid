@@ -25,7 +25,7 @@ public class PlaceRepository {
 
     public PlaceRepository(Context context) {
         AppDatabase db = AppDatabase.getDatabase(context);
-        this.placeDao = db.placeDao();  // Initialisation correcte
+        this.placeDao = db.placeDao();
         this.executor = ExecutorProvider.getInstance();    }
 
     public void addPlace(PlaceEntity place, ChildPlaceEntity details) {

@@ -8,7 +8,6 @@ import edu.esiea.examandroid.enums.PlaceType;
 @Entity(tableName = "place")
 public class PlaceEntity {
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     private int id;
     private String name;
     private String description;
