@@ -7,6 +7,8 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
+import java.util.List;
+
 import edu.esiea.examandroid.data.dto.PlaceWithDetails;
 import edu.esiea.examandroid.data.entity.CulturalPlaceEntity;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
@@ -15,6 +17,7 @@ import edu.esiea.examandroid.data.entity.PlaceToExerciseEntity;
 import edu.esiea.examandroid.data.entity.PlaceToGoOutEntity;
 import edu.esiea.examandroid.data.entity.PlaceToRelaxEntity;
 import edu.esiea.examandroid.data.entity.PlaceToSleepEntity;
+import edu.esiea.examandroid.enums.PlaceType;
 
 @Dao
 public interface PlaceDao {
@@ -46,4 +49,12 @@ public interface PlaceDao {
 
     @Delete
     void deletePlace(PlaceEntity place);
+
+    @Transaction
+    @Query("SELECT * FROM place")
+    List<PlaceWithDetails> getAllPlaces();
+
+    @Transaction
+    @Query("SELECT * FROM place WHERE type = :type")
+    List<PlaceWithDetails> getPlacesByType(PlaceType type);
 }

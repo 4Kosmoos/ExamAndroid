@@ -2,6 +2,8 @@ package edu.esiea.examandroid.repository;
 
 import android.content.Context;
 
+import java.util.List;
+
 import edu.esiea.examandroid.data.AppDatabase;
 import edu.esiea.examandroid.data.dao.PlaceDao;
 import edu.esiea.examandroid.data.dao.ChildPlaceEntity;
@@ -14,6 +16,7 @@ import edu.esiea.examandroid.data.entity.PlaceToGoOutEntity;
 import edu.esiea.examandroid.data.entity.PlaceToRelaxEntity;
 import edu.esiea.examandroid.data.entity.PlaceToSleepEntity;
 import edu.esiea.examandroid.data.executor.ExecutorProvider;
+import edu.esiea.examandroid.enums.PlaceType;
 
 public class PlaceRepository {
 
@@ -87,6 +90,14 @@ public class PlaceRepository {
             default:
                 break;
         }
+    }
+
+    public List<PlaceWithDetails> getAllPlaces() {
+        return placeDao.getAllPlaces();
+    }
+
+    public List<PlaceWithDetails> getPlacesByType(PlaceType type) {
+        return placeDao.getPlacesByType(type);
     }
 }
 
