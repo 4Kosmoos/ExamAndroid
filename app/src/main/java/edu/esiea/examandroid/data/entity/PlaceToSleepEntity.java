@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.List;
 
+import edu.esiea.examandroid.data.dao.SpecificPlaceDao;
 import edu.esiea.examandroid.enums.SleepCategories;
 
 @Entity(
@@ -19,7 +20,7 @@ import edu.esiea.examandroid.enums.SleepCategories;
                 onDelete = CASCADE
         )
 )
-public class PlaceToSleepEntity {
+public class PlaceToSleepEntity implements SpecificPlaceDao {
 
     @PrimaryKey
     private int placeId;
@@ -35,8 +36,13 @@ public class PlaceToSleepEntity {
         this.categories = categories;
     }
 
-    public int getPlaceId() { return placeId; }
-    public void setPlaceId(int placeId) { this.placeId = placeId; }
+    @Override
+    public void setPlaceId(int placeId) {
+        this.placeId = placeId;
+    }
+    public int getPlaceId() {
+        return placeId;
+    }
 
     public double getMinNightPrice() { return minNightPrice; }
     public void setMinNightPrice(double minNightPrice) { this.minNightPrice = minNightPrice; }

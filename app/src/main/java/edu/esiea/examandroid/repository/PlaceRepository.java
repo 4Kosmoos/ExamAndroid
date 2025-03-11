@@ -1,6 +1,7 @@
 package edu.esiea.examandroid.repository;
 
 import edu.esiea.examandroid.data.dao.PlaceDao;
+import edu.esiea.examandroid.data.dao.SpecificPlaceDao;
 import edu.esiea.examandroid.data.dto.PlaceWithDetails;
 import edu.esiea.examandroid.data.entity.CulturalPlaceEntity;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
@@ -18,24 +19,9 @@ public class PlaceRepository {
         this.placeDao = placeDao;
     }
 
-    public void addPlace(PlaceEntity place, Object details) {
-        long placeId = placeDao.insertPlace(place);
-
-    // permet de faire le lien entre entre l’ID auto-généré du parent et la clé étrangère dans la table fille(Room le fait pas auto)
-    //TODO : opti cette méthode.
-        if (details instanceof PlaceToEatEntity) {
-            ((PlaceToEatEntity) details).setPlaceId((int) placeId);
-        } else if (details instanceof PlaceToSleepEntity) {
-            ((PlaceToSleepEntity) details).setPlaceId((int) placeId);
-        } else if (details instanceof PlaceToGoOutEntity) {
-            ((PlaceToGoOutEntity) details).setPlaceId((int) placeId);
-        } else if (details instanceof PlaceToRelaxEntity) {
-            ((PlaceToRelaxEntity) details).setPlaceId((int) placeId);
-        } else if (details instanceof PlaceToExerciseEntity) {
-            ((PlaceToExerciseEntity) details).setPlaceId((int) placeId);
-        } else if (details instanceof CulturalPlaceEntity) {
-            ((CulturalPlaceEntity) details).setPlaceId((int) placeId);
-        }
+    public void addPlace(PlaceEntity place, SpecificPlaceDao details) {
+        int placeId = (int) placeDao.insertPlace(place);
+        details.setPlaceId(placeId);
 
         switch (place.getType()) {
             case PlaceToEat:

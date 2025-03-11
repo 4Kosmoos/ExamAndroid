@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.List;
 
+import edu.esiea.examandroid.data.dao.SpecificPlaceDao;
 import edu.esiea.examandroid.enums.RelaxCategories;
 
 @Entity(
@@ -19,7 +20,7 @@ import edu.esiea.examandroid.enums.RelaxCategories;
                 onDelete = CASCADE
         )
 )
-public class PlaceToRelaxEntity {
+public class PlaceToRelaxEntity implements SpecificPlaceDao {
 
     @PrimaryKey
     private int placeId;
@@ -38,8 +39,13 @@ public class PlaceToRelaxEntity {
         this.categories = categories;
     }
 
-    public int getPlaceId() { return placeId; }
-    public void setPlaceId(int placeId) { this.placeId = placeId; }
+    @Override
+    public void setPlaceId(int placeId) {
+        this.placeId = placeId;
+    }
+    public int getPlaceId() {
+        return placeId;
+    }
 
     public List<RelaxCategories> getCategories() { return categories; }
     public void setCategories(List<RelaxCategories> categories) { this.categories = categories; }

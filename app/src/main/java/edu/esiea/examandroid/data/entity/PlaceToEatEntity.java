@@ -9,6 +9,7 @@ import androidx.room.ForeignKey;
 
 import java.util.List;
 
+import edu.esiea.examandroid.data.dao.SpecificPlaceDao;
 import edu.esiea.examandroid.enums.EatCategories;
 import edu.esiea.examandroid.enums.PriceRange;
 
@@ -21,7 +22,7 @@ import edu.esiea.examandroid.enums.PriceRange;
                 onDelete = CASCADE
         )
 )
-public class PlaceToEatEntity {
+public class PlaceToEatEntity implements SpecificPlaceDao {
     @PrimaryKey
     private int placeId;
 
@@ -37,8 +38,13 @@ public class PlaceToEatEntity {
         this.categories = categories;
     }
 
-    public int getPlaceId() { return placeId; }
-    public void setPlaceId(int placeId) { this.placeId = placeId; }
+    @Override
+    public void setPlaceId(int placeId) {
+        this.placeId = placeId;
+    }
+    public int getPlaceId() {
+        return placeId;
+    }
 
     public PriceRange getPriceRange() { return priceRange; }
     public void setPriceRange(PriceRange priceRange) { this.priceRange = priceRange; }
