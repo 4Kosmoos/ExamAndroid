@@ -1,6 +1,6 @@
 package edu.esiea.examandroid.enums;
 
-public enum CulturalPlaceCategories {
+public enum CulturalCategories {
     MUSEE,
     MONUMENT,
     POINT_DE_VUE,

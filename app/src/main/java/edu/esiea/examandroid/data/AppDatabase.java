@@ -7,6 +7,7 @@ import androidx.room.TypeConverters;
 
 import android.content.Context;
 
+import edu.esiea.examandroid.data.converter.CulturalCategoriesConverter;
 import edu.esiea.examandroid.data.converter.EatCategoriesListConverter;
 import edu.esiea.examandroid.data.converter.GoOutCategoriesConverter;
 import edu.esiea.examandroid.data.converter.PriceRangeConverter;
@@ -36,7 +37,8 @@ import edu.esiea.examandroid.data.entity.PlaceToSleepEntity;
         SleepCategoriesConverter.class,
         GoOutCategoriesConverter.class,
         RelaxCategoriesConverter.class,
-        SportCategoriesConverter.class
+        SportCategoriesConverter.class,
+        CulturalCategoriesConverter.class
 })
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;

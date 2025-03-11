@@ -3,12 +3,14 @@ package edu.esiea.examandroid.data.mapper;
 import java.util.List;
 
 import edu.esiea.examandroid.data.dto.PlaceWithDetails;
+import edu.esiea.examandroid.data.entity.CulturalPlaceEntity;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
 import edu.esiea.examandroid.data.entity.PlaceToEatEntity;
 import edu.esiea.examandroid.data.entity.PlaceToExerciseEntity;
 import edu.esiea.examandroid.data.entity.PlaceToGoOutEntity;
 import edu.esiea.examandroid.data.entity.PlaceToRelaxEntity;
 import edu.esiea.examandroid.data.entity.PlaceToSleepEntity;
+import edu.esiea.examandroid.enums.CulturalCategories;
 import edu.esiea.examandroid.enums.EatCategories;
 import edu.esiea.examandroid.enums.GoOutCategories;
 import edu.esiea.examandroid.enums.RelaxCategories;
@@ -16,6 +18,7 @@ import edu.esiea.examandroid.enums.SleepCategories;
 import edu.esiea.examandroid.enums.PlaceType;
 import edu.esiea.examandroid.enums.PriceRange;
 import edu.esiea.examandroid.enums.SportCategories;
+import edu.esiea.examandroid.model.CulturalPlace;
 import edu.esiea.examandroid.model.Place;
 import edu.esiea.examandroid.model.PlaceToEat;
 import edu.esiea.examandroid.model.PlaceToExercise;
@@ -101,12 +104,19 @@ public class PlaceMapper {
 
             case CulturalPlace:
 
-                break;
+                CulturalPlaceEntity culturalDetail = dto.getCulturalPlaceEntity();
+                if (culturalDetail == null){
+                    return new Place(id, name, description, phoneNumber, email, website,
+                            latitude, longitude, type);
+                }
+                String culturalOpeningHours = culturalDetail.getOpeningHours();
+                double culturalEntryFee = culturalDetail.getEntryFee();
+                List<CulturalCategories> culturalCategories = culturalDetail.getCategories();
+                return new CulturalPlace(id,name,description, phoneNumber, email, website, latitude, longitude, type, culturalOpeningHours, culturalEntryFee, culturalCategories);
 
             default:
                 return new Place(id, name, description, phoneNumber, email, website,
                         latitude, longitude, type);
         }
-        return null;
     }
 }

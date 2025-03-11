@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.List;
 
-import edu.esiea.examandroid.enums.CulturalPlaceCategories;
+import edu.esiea.examandroid.enums.CulturalCategories;
 
 @Entity(
         tableName = "cultural_place",
@@ -23,14 +23,14 @@ public class CulturalPlaceEntity {
 
     @PrimaryKey
     private int placeId;
-    private List<CulturalPlaceCategories> categories;
+    private List<CulturalCategories> categories;
     private String openingHours;
     private double entryFee;
 
     public CulturalPlaceEntity() {
     }
 
-    public CulturalPlaceEntity(int placeId, String openingHours, double entryFee, List<CulturalPlaceCategories> categories) {
+    public CulturalPlaceEntity(int placeId, String openingHours, double entryFee, List<CulturalCategories> categories) {
         this.placeId = placeId;
         this.openingHours = openingHours;
         this.entryFee = entryFee;
@@ -40,8 +40,8 @@ public class CulturalPlaceEntity {
     public int getPlaceId() { return placeId; }
     public void setPlaceId(int placeId) { this.placeId = placeId; }
 
-    public List<CulturalPlaceCategories> getCategories() { return categories; }
-    public void setCategories(List<CulturalPlaceCategories> categories) { this.categories = categories; }
+    public List<CulturalCategories> getCategories() { return categories; }
+    public void setCategories(List<CulturalCategories> categories) { this.categories = categories; }
 
     public String getOpeningHours() { return openingHours; }
     public void setOpeningHours(String openingHours) { this.openingHours = openingHours; }
