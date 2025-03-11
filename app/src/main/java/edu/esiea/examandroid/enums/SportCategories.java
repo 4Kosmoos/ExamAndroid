@@ -1,6 +1,6 @@
 package edu.esiea.examandroid.enums;
 
-public enum SportPlaceCategories {
+public enum SportCategories {
     PISCINE,
     SALLE_DE_FOOT,
     SALLE_DE_MUSCU,

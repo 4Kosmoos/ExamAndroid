@@ -5,6 +5,7 @@ import java.util.List;
 import edu.esiea.examandroid.data.dto.PlaceWithDetails;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
 import edu.esiea.examandroid.data.entity.PlaceToEatEntity;
+import edu.esiea.examandroid.data.entity.PlaceToExerciseEntity;
 import edu.esiea.examandroid.data.entity.PlaceToGoOutEntity;
 import edu.esiea.examandroid.data.entity.PlaceToRelaxEntity;
 import edu.esiea.examandroid.data.entity.PlaceToSleepEntity;
@@ -14,8 +15,10 @@ import edu.esiea.examandroid.enums.RelaxCategories;
 import edu.esiea.examandroid.enums.SleepCategories;
 import edu.esiea.examandroid.enums.PlaceType;
 import edu.esiea.examandroid.enums.PriceRange;
+import edu.esiea.examandroid.enums.SportCategories;
 import edu.esiea.examandroid.model.Place;
 import edu.esiea.examandroid.model.PlaceToEat;
+import edu.esiea.examandroid.model.PlaceToExercise;
 import edu.esiea.examandroid.model.PlaceToRelax;
 import edu.esiea.examandroid.model.PlaceToSleep;
 import edu.esiea.examandroid.model.PlaceToGoOut;
@@ -85,7 +88,16 @@ public class PlaceMapper {
 
             case PlaceToExercise:
 
-                break;
+                PlaceToExerciseEntity sportDetail = dto.getPlaceToExerciseEntity();
+                if (sportDetail == null){
+                return new Place(id, name, description, phoneNumber, email, website,
+                        latitude, longitude, type);
+                }
+                String sportOpeningHours = sportDetail.getOpeningHours();
+                double sportEntryFee = sportDetail.getEntryFee();
+                List<SportCategories> sportCategories = sportDetail.getCategories();
+                boolean subscription = sportDetail.getMandatorySubscription();
+                return new PlaceToExercise(id,name,description, phoneNumber, email, website, latitude, longitude, type, sportOpeningHours, sportCategories, sportEntryFee, subscription);
 
             case CulturalPlace:
 

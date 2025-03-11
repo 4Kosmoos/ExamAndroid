@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.List;
 
-import edu.esiea.examandroid.enums.SportPlaceCategories;
+import edu.esiea.examandroid.enums.SportCategories;
 
 @Entity(
         tableName = "place_to_Exercise",
@@ -23,7 +23,7 @@ import edu.esiea.examandroid.enums.SportPlaceCategories;
 public class PlaceToExerciseEntity {
     @PrimaryKey
     private int placeId;
-    private List<SportPlaceCategories> categories;
+    private List<SportCategories> categories;
     private String openingHours;
     private double entryFee;
     private boolean mandatorySubscription;
@@ -31,7 +31,7 @@ public class PlaceToExerciseEntity {
     public PlaceToExerciseEntity() {
     }
 
-    public PlaceToExerciseEntity(int placeId, String openingHours, double entryFee, List<SportPlaceCategories> categories, boolean mandatorySubscription) {
+    public PlaceToExerciseEntity(int placeId, String openingHours, double entryFee, List<SportCategories> categories, boolean mandatorySubscription) {
         this.placeId = placeId;
         this.openingHours = openingHours;
         this.categories = categories;
@@ -42,8 +42,8 @@ public class PlaceToExerciseEntity {
     public int getPlaceId() { return placeId; }
     public void setPlaceId(int placeId) { this.placeId = placeId; }
 
-    public List<SportPlaceCategories> getCategories() { return categories; }
-    public void setCategories(List<SportPlaceCategories> categories) { this.categories = categories; }
+    public List<SportCategories> getCategories() { return categories; }
+    public void setCategories(List<SportCategories> categories) { this.categories = categories; }
 
     public String getOpeningHours() { return openingHours; }
     public void setOpeningHours(String openingHours) { this.openingHours = openingHours; }
