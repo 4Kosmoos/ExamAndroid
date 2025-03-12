@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_map_to_list"
             app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_map_to_detail"
+            app:destination="@id/detailFragment" />
     </fragment>
 
     <fragment
