@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav.xml"
+    app:startDestination="@+id/mapFragment">
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="edu.esiea.examandroid.ui.MapFragment"
+        android:label="Map Fragment"
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_map_to_list"
+            app:destination="@id/listFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="edu.esiea.examandroid.ui.ListFragment"
+        android:label="List Fragment"
+        tools:layout="@layout/fragment_list">
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="edu.esiea.examandroid.ui.DetailFragment"
+        android:label="Detail Fragment"
+        tools:layout="@layout/fragment_detail">
+    </fragment>
+
+</navigation>
