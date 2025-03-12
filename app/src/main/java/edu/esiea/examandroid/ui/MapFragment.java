@@ -3,6 +3,7 @@ package edu.esiea.examandroid.ui;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,15 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
-import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.MapEventsOverlay;
+import org.osmdroid.views.overlay.Marker;
 
 import edu.esiea.examandroid.R;
+import edu.esiea.examandroid.model.Place;
 import edu.esiea.examandroid.viewmodel.PlaceViewModel;
 
 public class MapFragment extends Fragment {
@@ -66,5 +66,34 @@ public View onCreateView(@NonNull LayoutInflater inflater,
 
     return view;
 }
+//    private void addMarker(Place place) {
+//        Marker marker = new Marker(mapView);
+//        marker.setPosition(new GeoPoint(place.getLatitude(), place.getLongitude()));
+//        marker.setTitle(place.getName());
+//        marker.setSnippet(place.getDescription());
+//        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+//
+//        marker.setOnMarkerClickListener((m, mapView) -> {
+//
+//            Bundle args = new Bundle();
+//            args.putInt("placeId", place.getId());
+//            NavHostFragment.findNavController(this)
+//                    .navigate(R.id.action_map_to_detail, args);
+//            return true;
+//        });
+//
+//        mapView.getOverlays().add(marker);
+//    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
 }
