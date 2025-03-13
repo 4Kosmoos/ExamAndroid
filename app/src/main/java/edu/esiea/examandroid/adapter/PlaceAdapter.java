@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,11 +15,13 @@ import java.util.List;
 
 import edu.esiea.examandroid.R;
 import edu.esiea.examandroid.data.dto.PlaceWithDetails;
+import edu.esiea.examandroid.enums.PlaceType;
 
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.PlaceViewHolder> {
 
     public interface OnPlaceClickListener {
         void onEditClicked(PlaceWithDetails pwd);
+
         void onDeleteClicked(PlaceWithDetails pwd);
     }
 
@@ -56,22 +59,43 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.PlaceViewHol
     static class PlaceViewHolder extends RecyclerView.ViewHolder {
         TextView txtName, txtType;
         Button btnEdit, btnDelete;
+        ImageView imgTypeIcon;
 
         public PlaceViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);
-            txtType = itemView.findViewById(R.id.txtType);
+            imgTypeIcon = itemView.findViewById(R.id.imgTypeIcon);
             btnEdit = itemView.findViewById(R.id.btnEdit);
             btnDelete = itemView.findViewById(R.id.btnDelete);
         }
 
         public void bind(PlaceWithDetails pwd, OnPlaceClickListener listener) {
             txtName.setText(pwd.getPlace().getName());
-            txtType.setText(pwd.getPlace().getType().toString());
-            // TODO icône.
+            PlaceType type = pwd.getPlace().getType();
+            int iconRes = getIconResForType(type);
+            imgTypeIcon.setImageResource(iconRes);
 
             btnEdit.setOnClickListener(v -> listener.onEditClicked(pwd));
             btnDelete.setOnClickListener(v -> listener.onDeleteClicked(pwd));
+        }
+
+        private int getIconResForType(PlaceType type) {
+            switch (type) {
+                case PlaceToEat:
+                    return R.drawable.ic_eat;
+                case PlaceToSleep:
+                    return R.drawable.ic_sleep;
+                case PlaceToGoOut:
+                    return R.drawable.ic_out;
+                case PlaceToRelax:
+                    return R.drawable.ic_relax;
+                case PlaceToExercise:
+                    return R.drawable.ic_sport;
+                case CulturalPlace:
+                    return R.drawable.ic_cultural;
+                default:
+                    return R.drawable.ic_other;
+            }
         }
     }
 }

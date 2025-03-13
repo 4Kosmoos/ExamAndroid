@@ -7,6 +7,16 @@
     android:padding="8dp"
     >
 
+
+    <ImageView
+        android:id="@+id/imgTypeIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        />
+        <!--android:contentDescription="@string/type_icon"
+        android:src="@drawable/ic_placeholder"-->
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0dp"
