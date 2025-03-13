@@ -98,4 +98,14 @@ public class PlaceViewModel extends AndroidViewModel {
             loadAllPlaces();
         });
     }
+
+    public LiveData<PlaceWithDetails> getPlaceById(int id) {
+        MutableLiveData<PlaceWithDetails> liveData = new MutableLiveData<>();
+        ExecutorProvider.getInstance().getExecutor().execute(() -> {
+            PlaceWithDetails pwd = repository.getPlaceWithDetails(id);
+            liveData.postValue(pwd);
+        });
+        return liveData;
+    }
+
 }
