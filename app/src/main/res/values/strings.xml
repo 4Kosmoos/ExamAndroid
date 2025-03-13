@@ -7,4 +7,5 @@
     <string name="button_map">Carte</string>
     <string name="edit">Éditer</string>
     <string name="delete">Supprimer</string>
+    <string name="no_places">Aucun lieu</string>
 </resources>

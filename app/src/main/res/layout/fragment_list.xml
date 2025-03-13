@@ -8,9 +8,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         >
 
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        >
         <Spinner
             android:id="@+id/spinnerFilter"
             android:layout_width="0dp"
@@ -24,14 +30,16 @@
             android:layout_height="wrap_content"
             android:text="@string/button_map"
             />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/emptyView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aucun lieu"
+            android:text="@string/no_places"
             android:gravity="center"
             android:visibility="gone"
+            android:padding="16dp"
             />
 
         <androidx.recyclerview.widget.RecyclerView
