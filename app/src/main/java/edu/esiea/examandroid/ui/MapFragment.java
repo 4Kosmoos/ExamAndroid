@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -23,6 +24,8 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 
 import edu.esiea.examandroid.R;
+import edu.esiea.examandroid.data.dto.PlaceWithDetails;
+import edu.esiea.examandroid.data.entity.PlaceEntity;
 import edu.esiea.examandroid.model.Place;
 import edu.esiea.examandroid.viewmodel.PlaceViewModel;
 
@@ -85,6 +88,35 @@ public View onCreateView(@NonNull LayoutInflater inflater,
 //
 //        mapView.getOverlays().add(marker);
 //    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        placeViewModel = new ViewModelProvider(requireActivity()).get(PlaceViewModel.class);
+
+        placeViewModel.getAllPlacesLive().observe(getViewLifecycleOwner(), places -> {
+            mapView.getOverlays().clear();
+
+            for (PlaceWithDetails pwd : places) {
+                PlaceEntity place = pwd.getPlace();
+                Marker marker = new Marker(mapView);
+                marker.setPosition(new GeoPoint(place.getLatitude(), place.getLongitude()));
+                marker.setTitle(place.getName());
+                marker.setSnippet(place.getDescription());
+                marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+                marker.setOnMarkerClickListener((m, mapView) -> {
+                    Bundle args = new Bundle();
+                    args.putInt("placeId", place.getId());
+                    NavHostFragment.findNavController(MapFragment.this)
+                            .navigate(R.id.action_map_to_detail, args);
+                    return true;
+                });
+                mapView.getOverlays().add(marker);
+            }
+            mapView.invalidate();
+        });
+    }
 
     @Override
     public void onResume() {
