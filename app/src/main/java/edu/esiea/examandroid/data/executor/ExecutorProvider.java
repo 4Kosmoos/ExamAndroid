@@ -6,10 +6,10 @@ import java.util.concurrent.Executors;
 
 public class ExecutorProvider {
     private static volatile ExecutorProvider INSTANCE;
-    private final ExecutorService databaseExecutor;
+    private final ExecutorService executorService;
 
     private ExecutorProvider() {
-        databaseExecutor = Executors.newSingleThreadExecutor();
+        executorService = Executors.newSingleThreadExecutor();
     }
 
     public static ExecutorProvider getInstance() {
@@ -23,11 +23,11 @@ public class ExecutorProvider {
         return INSTANCE;
     }
 
-    public ExecutorService getDatabaseExecutor() {
-        return databaseExecutor;
+    public ExecutorService getExecutor() {
+        return executorService;
     }
 
     public void shutdown() {
-        databaseExecutor.shutdown();
+        executorService.shutdown();
     }
 }

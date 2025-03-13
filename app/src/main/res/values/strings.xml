@@ -5,4 +5,6 @@
     <string name="hello_detail_fragment">Hello detail fragment</string>
     <string name="button_list">Liste des lieux</string>
     <string name="button_map">Carte</string>
+    <string name="edit">Éditer</string>
+    <string name="delete">Supprimer</string>
 </resources>

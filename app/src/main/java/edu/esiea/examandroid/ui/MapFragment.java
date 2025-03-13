@@ -66,6 +66,7 @@ public View onCreateView(@NonNull LayoutInflater inflater,
 
     return view;
 }
+
 //    private void addMarker(Place place) {
 //        Marker marker = new Marker(mapView);
 //        marker.setPosition(new GeoPoint(place.getLatitude(), place.getLongitude()));
