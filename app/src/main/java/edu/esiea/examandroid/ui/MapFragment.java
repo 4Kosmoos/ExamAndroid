@@ -1,11 +1,15 @@
 package edu.esiea.examandroid.ui;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -26,6 +30,7 @@ import org.osmdroid.views.overlay.Marker;
 import edu.esiea.examandroid.R;
 import edu.esiea.examandroid.data.dto.PlaceWithDetails;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
+import edu.esiea.examandroid.enums.PlaceType;
 import edu.esiea.examandroid.model.Place;
 import edu.esiea.examandroid.viewmodel.PlaceViewModel;
 
@@ -70,6 +75,17 @@ public View onCreateView(@NonNull LayoutInflater inflater,
     return view;
 }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
 //    private void addMarker(Place place) {
 //        Marker marker = new Marker(mapView);
 //        marker.setPosition(new GeoPoint(place.getLatitude(), place.getLongitude()));
@@ -104,7 +120,13 @@ public View onCreateView(@NonNull LayoutInflater inflater,
                 marker.setPosition(new GeoPoint(place.getLatitude(), place.getLongitude()));
                 marker.setTitle(place.getName());
                 marker.setSnippet(place.getDescription());
+
+                PlaceType type = place.getType();
+                Drawable iconDrawable = getIconDrawable(type);
+                Drawable scaledDrawable = getScaledDrawable(iconDrawable, 0.05f);
+                marker.setIcon(scaledDrawable);
                 marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
                 marker.setOnMarkerClickListener((m, mapView) -> {
                     Bundle args = new Bundle();
                     args.putInt("placeId", place.getId());
@@ -118,15 +140,33 @@ public View onCreateView(@NonNull LayoutInflater inflater,
         });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
+    private Drawable getIconDrawable(PlaceType type) {
+        switch (type) {
+            case PlaceToEat:
+                return ContextCompat.getDrawable(requireContext(), R.drawable.ic_eat);
+            case PlaceToSleep:
+                return ContextCompat.getDrawable(requireContext(), R.drawable.ic_sleep);
+            case PlaceToGoOut:
+                return ContextCompat.getDrawable(requireContext(), R.drawable.ic_out);
+            case PlaceToRelax:
+                return ContextCompat.getDrawable(requireContext(), R.drawable.ic_relax);
+            case PlaceToExercise:
+                return ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport);
+            case CulturalPlace:
+                return ContextCompat.getDrawable(requireContext(), R.drawable.ic_cultural);
+            default:
+                return ContextCompat.getDrawable(requireContext(), R.drawable.ic_other);
+        }
     }
+    private Drawable getScaledDrawable(Drawable drawable, float scale) {
+        if (!(drawable instanceof BitmapDrawable)) {
+            return drawable;
+        }
+        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+        int width = (int) (bitmap.getWidth() * scale);
+        int height = (int) (bitmap.getHeight() * scale);
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
+        return new BitmapDrawable(getResources(), scaledBitmap);
     }
 }
