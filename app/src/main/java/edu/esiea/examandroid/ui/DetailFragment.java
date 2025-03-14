@@ -9,9 +9,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,11 +49,14 @@ public class DetailFragment extends Fragment {
     private Spinner spinnerType;
     private Button buttonCancel, buttonValidate;
 
-    private double latitude, longitude; // Pour le mode création
-    private int placeId = -1;          // Pour le mode modification
+    private double latitude, longitude;
+    private int placeId = -1;          // Pour vérifier si on edit ou non
     private boolean isCreationMode = false;
 
     private PlaceViewModel placeViewModel;
+
+//    private FrameLayout containerVariable;
+//    private View partialView;
 
     public DetailFragment() {
     }
@@ -68,6 +73,8 @@ public class DetailFragment extends Fragment {
         editEmail = root.findViewById(R.id.editTextEmail);
         editWebsite = root.findViewById(R.id.editTextUrl);
         spinnerType = root.findViewById(R.id.spinnerType);
+//        containerVariable = root.findViewById(R.id.containerVariable);
+
         buttonCancel = root.findViewById(R.id.buttonCancel);
         buttonValidate = root.findViewById(R.id.buttonValidate);
 
@@ -95,9 +102,6 @@ public class DetailFragment extends Fragment {
                         editWebsite.setText(pwd.getPlace().getWebsite());
 
                         PlaceType type = pwd.getPlace().getType();
-                        // Il faut adapter si tu utilises un ArrayAdapter<PlaceType>
-                        // Trouver l'index
-                        // ...
                     }
                 });
             }
@@ -112,11 +116,51 @@ public class DetailFragment extends Fragment {
                 android.R.layout.simple_spinner_item,
                 PlaceType.values()
         );
-        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerType.setAdapter(typeAdapter);
+////        spinnerType.setSelection(0);
+////        showPartialForType((PlaceType) spinnerType.getSelectedItem());
+////
+////        spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+////            @Override
+////            public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+////                PlaceType selectedType = (PlaceType) spinnerType.getSelectedItem();
+////                showPartialForType(selectedType);
+////            }
+////
+////            @Override
+////            public void onNothingSelected(AdapterView<?> parent) {}
+////        });
+//
         buttonValidate.setOnClickListener(v -> onValidateClicked());
-
+        buttonCancel.setOnClickListener(v -> NavHostFragment.findNavController(this).navigateUp());
     }
+//
+//    private void showPartialForType(PlaceType type) {
+//        containerVariable.removeAllViews();
+//        LayoutInflater inflater = LayoutInflater.from(requireContext());
+//
+//        switch (type) {
+//            case PlaceToEat:
+//                partialView = inflater.inflate(R.layout.partial_eat, containerVariable, false);
+//                containerVariable.addView(partialView);
+//                setupPartialEat(partialView);
+//                break;
+//            case PlaceToSleep:
+////                partialView = inflater.inflate(R.layout.partial_sleep, containerVariable, false);
+////                containerVariable.addView(partialView);
+////                break;
+//        }
+//    }
+//
+//    private void setupPartialEat(View partialView) {
+//        Spinner spinnerPriceRangeEat = partialView.findViewById(R.id.spinnerPriceRangeEat);
+//        ArrayAdapter<PriceRange> priceAdapter = new ArrayAdapter<>(
+//                requireContext(),
+//                android.R.layout.simple_spinner_item,
+//                PriceRange.values()
+//        );
+//        spinnerPriceRangeEat.setAdapter(priceAdapter);
+//    }
 
     private void onValidateClicked() {
 
@@ -145,7 +189,7 @@ public class DetailFragment extends Fragment {
             switch (selectedType) {
                 case PlaceToEat:
                     details = new PlaceToEatEntity();
-                    // On peut initialiser priceRange, categories...
+                    //details = buildEatDetails();
                     break;
                 case PlaceToSleep:
                     details = new PlaceToSleepEntity();
@@ -164,17 +208,13 @@ public class DetailFragment extends Fragment {
                     break;
             }
 
-
+//            Log.d("DetailFragment", "Nouvelle place : " + newPlace);
+//            Log.d("DetailFragment", "Détails : " + details);
             placeViewModel.addPlace(newPlace, details);
             NavHostFragment.findNavController(DetailFragment.this).navigateUp();
         } else {
-            // Modification
-            // Charger l'entité existante (placeId)
-            // On pourrait recharger depuis le ViewModel en synchrone,
-            // ou on a déjà l'objet en mémoire dans un champ
-            // => Adapter selon ton code.
+            // Modification PAS ENCORE IMPLÉMENTÉE
 
-            // Version simple : on refait un PlaceEntity
             PlaceEntity updatedPlace = new PlaceEntity(
                     placeId,
                     name,
@@ -182,16 +222,48 @@ public class DetailFragment extends Fragment {
                     phone,
                     email,
                     website,
-                    0,  // On n'a pas la lat/lng ?
-                    0,  // => On doit re-charger depuis la base
+                    0,  // censé garder la latitude, longitude ( on verra plus tard)
+                    0,
                     selectedType
             );
-            // Pareil pour l'entité fille
             ChildPlaceEntity newDetails = null;
-            // ...
             // placeViewModel.updatePlace(updatedPlace, newDetails);
-            // ...
             NavHostFragment.findNavController(this).navigateUp();
         }
     }
+//    private PlaceToEatEntity buildEatDetails() {
+//        Spinner spinnerPriceRangeEat = partialView.findViewById(R.id.spinnerPriceRangeEat);
+//        EditText editEatCategories = partialView.findViewById(R.id.editEatCategories);
+//
+//        PlaceToEatEntity detailsEat = new PlaceToEatEntity();
+//        PriceRange selectedPriceRange = (PriceRange) spinnerPriceRangeEat.getSelectedItem();
+//        detailsEat.setPriceRange(selectedPriceRange);
+//
+//        String catsStr = editEatCategories.getText().toString().trim();
+//        List<EatCategories> catList = parseEatCategories(catsStr);
+//        detailsEat.setCategories(catList);
+//        Log.d("DetailFragment", "PriceRange sélectionné : " + selectedPriceRange);
+//        Log.d("DetailFragment", "Catégories saisies : " + catsStr);
+//        Log.d("DetailFragment", "Détails construits : " + detailsEat);
+//        return detailsEat;
+//    }
+//
+//
+//    private List<EatCategories> parseEatCategories(String catsStr) {
+//        List<EatCategories> list = new ArrayList<>();
+//        if (catsStr.isEmpty()) {
+//            return list;
+//        }
+//        String[] splitted = catsStr.split(",");
+//        for (String rawCat : splitted) {
+//            rawCat = rawCat.trim();
+//            try {
+//                EatCategories cat = EatCategories.valueOf(rawCat);
+//                list.add(cat);
+//            } catch (IllegalArgumentException e) {
+//            }
+//        }
+//        return list;
+//    }
+
 }
