@@ -1,11 +1,16 @@
 package edu.esiea.examandroid.data;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import android.content.Context;
+
+import java.util.Arrays;
+import java.util.List;
 
 import edu.esiea.examandroid.data.converter.CulturalCategoriesConverter;
 import edu.esiea.examandroid.data.converter.EatCategoriesListConverter;
@@ -22,6 +27,11 @@ import edu.esiea.examandroid.data.entity.PlaceToExerciseEntity;
 import edu.esiea.examandroid.data.entity.PlaceToGoOutEntity;
 import edu.esiea.examandroid.data.entity.PlaceToRelaxEntity;
 import edu.esiea.examandroid.data.entity.PlaceToSleepEntity;
+import edu.esiea.examandroid.data.executor.ExecutorProvider;
+import edu.esiea.examandroid.enums.EatCategories;
+import edu.esiea.examandroid.enums.PlaceType;
+import edu.esiea.examandroid.enums.PriceRange;
+import edu.esiea.examandroid.enums.SportCategories;
 
 @Database(entities = {PlaceEntity.class,
         PlaceToEatEntity.class,
