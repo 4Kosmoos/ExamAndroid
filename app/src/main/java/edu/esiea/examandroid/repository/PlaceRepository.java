@@ -99,5 +99,16 @@ public class PlaceRepository {
     public List<PlaceWithDetails> getPlacesByType(PlaceType type) {
         return placeDao.getPlacesByType(type);
     }
+
+    public void movePlace(int placeId, double newLat, double newLng) {
+        PlaceWithDetails pwd = placeDao.getPlaceWithDetails(placeId);
+        if (pwd != null) {
+            PlaceEntity entity = pwd.getPlace();
+            entity.setLatitude(newLat);
+            entity.setLongitude(newLng);
+            placeDao.updatePlace(entity);
+        }
+    }
+
 }
 

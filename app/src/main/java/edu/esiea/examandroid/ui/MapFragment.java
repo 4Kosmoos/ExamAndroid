@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,11 +21,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.osmdroid.config.Configuration;
+import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 
 import edu.esiea.examandroid.R;
@@ -111,8 +115,38 @@ public View onCreateView(@NonNull LayoutInflater inflater,
 
         placeViewModel = new ViewModelProvider(requireActivity()).get(PlaceViewModel.class);
 
+        placeViewModel.getMovingPlaceId().observe(getViewLifecycleOwner(), movingId -> {
+        });
+
+        MapEventsOverlay eventsOverlay = new MapEventsOverlay(new MapEventsReceiver() {
+            @Override
+            public boolean singleTapConfirmedHelper(GeoPoint p) {
+                // Vérifie si on est en mode "déplacement"
+                Integer movingId = placeViewModel.getMovingPlaceId().getValue();
+                if (movingId != null && movingId != -1) {
+                    // Mettre à jour la position
+                    placeViewModel.movePlaceCoordinates(movingId, p.getLatitude(), p.getLongitude());
+                    // Réinitialiser
+                    placeViewModel.setMovingPlaceId(-1);
+                    Toast.makeText(requireContext(),
+                            "Lieu déplacé à " + p.getLatitude() + ", " + p.getLongitude(),
+                            Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean longPressHelper(GeoPoint p) {
+                return false;
+            }
+        });
+        mapView.getOverlays().add(eventsOverlay);
+
+
         placeViewModel.getAllPlacesLive().observe(getViewLifecycleOwner(), places -> {
             mapView.getOverlays().clear();
+            mapView.getOverlays().add(eventsOverlay);
 
             for (PlaceWithDetails pwd : places) {
                 PlaceEntity place = pwd.getPlace();
@@ -128,10 +162,7 @@ public View onCreateView(@NonNull LayoutInflater inflater,
                 marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
                 marker.setOnMarkerClickListener((m, mapView) -> {
-                    Bundle args = new Bundle();
-                    args.putInt("placeId", place.getId());
-                    NavHostFragment.findNavController(MapFragment.this)
-                            .navigate(R.id.action_map_to_detail, args);
+                    showMarkerInfoDialog(place);
                     return true;
                 });
                 mapView.getOverlays().add(marker);
@@ -168,5 +199,33 @@ public View onCreateView(@NonNull LayoutInflater inflater,
 
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
         return new BitmapDrawable(getResources(), scaledBitmap);
+    }
+
+    private void showMarkerInfoDialog(PlaceEntity place) {
+        new AlertDialog.Builder(requireContext())
+                .setTitle(place.getName())
+                .setMessage(place.getDescription())
+                .setPositiveButton("Éditer", (dialog, which) -> {
+                    Bundle args = new Bundle();
+                    args.putInt("placeId", place.getId());
+                    NavHostFragment.findNavController(MapFragment.this)
+                            .navigate(R.id.action_map_to_detail, args);
+                })
+                .setNegativeButton("Supprimer", (dialog, which) -> {
+                    new AlertDialog.Builder(requireContext())
+                            .setTitle("Confirmer la suppression")
+                            .setMessage("Voulez-vous vraiment supprimer ce lieu ?")
+                            .setNegativeButton("Annuler", (d, w) -> d.dismiss())
+                            .setPositiveButton("Supprimer", (d, w) -> {
+                                placeViewModel.removePlace(place);
+                                d.dismiss();
+                            })
+                            .show();
+                })
+                .setNeutralButton("Déplacer", (dialog, which) -> {
+                    placeViewModel.setMovingPlaceId(place.getId());
+                    Toast.makeText(requireContext(), "Cliquez sur la carte pour repositionner ce lieu", Toast.LENGTH_SHORT).show();
+                })
+                .show();
     }
 }

@@ -26,6 +26,8 @@ public class PlaceViewModel extends AndroidViewModel {
     private PlaceRepository repository;
     private MutableLiveData<List<PlaceWithDetails>> allPlacesLiveData;
 
+    private MutableLiveData<Integer> movingPlaceId = new MutableLiveData<>(-1);
+
     public PlaceViewModel(@NonNull Application application) {
         super(application);
         repository = new PlaceRepository(application);
@@ -108,4 +110,15 @@ public class PlaceViewModel extends AndroidViewModel {
         return liveData;
     }
 
+    public void setMovingPlaceId(int placeId) {
+        movingPlaceId.postValue(placeId);
+    }
+
+    public LiveData<Integer> getMovingPlaceId() {
+        return movingPlaceId;
+    }
+    public void movePlaceCoordinates(int placeId, double lat, double lng) {
+        repository.movePlace(placeId, lat, lng);
+        loadAllPlaces();
+    }
 }

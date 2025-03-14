@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -46,6 +47,9 @@ public interface PlaceDao {
     @Transaction
     @Query("SELECT * FROM place WHERE id = :placeId")
     PlaceWithDetails getPlaceWithDetails(int placeId);
+
+    @Update
+    void updatePlace(PlaceEntity place);
 
     @Delete
     void deletePlace(PlaceEntity place);
