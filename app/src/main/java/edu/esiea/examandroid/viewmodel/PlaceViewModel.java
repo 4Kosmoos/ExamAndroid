@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.esiea.examandroid.data.dao.ChildPlaceEntity;
 import edu.esiea.examandroid.data.dto.PlaceWithDetails;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
 import edu.esiea.examandroid.data.entity.PlaceToEatEntity;
@@ -121,4 +122,12 @@ public class PlaceViewModel extends AndroidViewModel {
         repository.movePlace(placeId, lat, lng);
         loadAllPlaces();
     }
+
+    public void addPlace(PlaceEntity place, ChildPlaceEntity details) {
+        ExecutorProvider.getInstance().getExecutor().execute(() -> {
+            repository.addPlace(place, details);
+            loadAllPlaces();
+        });
+    }
+
 }

@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -35,7 +34,6 @@ import edu.esiea.examandroid.R;
 import edu.esiea.examandroid.data.dto.PlaceWithDetails;
 import edu.esiea.examandroid.data.entity.PlaceEntity;
 import edu.esiea.examandroid.enums.PlaceType;
-import edu.esiea.examandroid.model.Place;
 import edu.esiea.examandroid.viewmodel.PlaceViewModel;
 
 public class MapFragment extends Fragment {
@@ -90,24 +88,6 @@ public View onCreateView(@NonNull LayoutInflater inflater,
         super.onPause();
         mapView.onPause();
     }
-//    private void addMarker(Place place) {
-//        Marker marker = new Marker(mapView);
-//        marker.setPosition(new GeoPoint(place.getLatitude(), place.getLongitude()));
-//        marker.setTitle(place.getName());
-//        marker.setSnippet(place.getDescription());
-//        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-//
-//        marker.setOnMarkerClickListener((m, mapView) -> {
-//
-//            Bundle args = new Bundle();
-//            args.putInt("placeId", place.getId());
-//            NavHostFragment.findNavController(this)
-//                    .navigate(R.id.action_map_to_detail, args);
-//            return true;
-//        });
-//
-//        mapView.getOverlays().add(marker);
-//    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -121,19 +101,22 @@ public View onCreateView(@NonNull LayoutInflater inflater,
         MapEventsOverlay eventsOverlay = new MapEventsOverlay(new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
-                // Vérifie si on est en mode "déplacement"
                 Integer movingId = placeViewModel.getMovingPlaceId().getValue();
                 if (movingId != null && movingId != -1) {
-                    // Mettre à jour la position
                     placeViewModel.movePlaceCoordinates(movingId, p.getLatitude(), p.getLongitude());
-                    // Réinitialiser
                     placeViewModel.setMovingPlaceId(-1);
                     Toast.makeText(requireContext(),
                             "Lieu déplacé à " + p.getLatitude() + ", " + p.getLongitude(),
                             Toast.LENGTH_SHORT).show();
                     return true;
+                }else {
+                    Bundle args = new Bundle();
+                    args.putDouble("latitude", p.getLatitude());
+                    args.putDouble("longitude", p.getLongitude());
+                    NavHostFragment.findNavController(MapFragment.this)
+                            .navigate(R.id.action_map_to_detail, args);
+                    return true;
                 }
-                return false;
             }
 
             @Override
