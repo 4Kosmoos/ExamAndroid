@@ -10,4 +10,9 @@
     <string name="no_places">Aucun lieu</string>
     <string name="cancel">Annuler</string>
     <string name="submit">Valider</string>
+    <string name="NamePlace">Nom du lieu</string>
+    <string name="description">Description</string>
+    <string name="phoneNumber">Numéro de téléphone</string>
+    <string name="mail">Mail</string>
+    <string name="url">Site Internet</string>
 </resources>
