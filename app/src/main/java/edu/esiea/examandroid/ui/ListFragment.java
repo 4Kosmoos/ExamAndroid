@@ -42,7 +42,6 @@ public class ListFragment extends Fragment {
     private List<PlaceWithDetails> allPlaces = new ArrayList<>();
 
     public ListFragment() {
-        // Required empty public constructor
     }
 
     @Nullable
